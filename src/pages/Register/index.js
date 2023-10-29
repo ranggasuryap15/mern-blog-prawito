@@ -19,7 +19,7 @@ const Register = () => {
         <Gap height={25} />
         <Button title="Register" />
         <Gap height={10} />
-        <Link title="Kembali ke Login" />
+        <Link title="Belum punya akun? Silakan Daftar" />
       </div>
     </div>
   );
