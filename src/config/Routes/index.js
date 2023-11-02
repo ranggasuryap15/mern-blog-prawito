@@ -1,17 +1,29 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Home, Login, Register } from "../../pages";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Login, Register } from "../../pages";
+import CreateBlog from "../../pages/CreateBlog";
+import DetailBlog from "../../pages/DetailBlog";
+import RootLayout from "./../../layouts/RootLayout";
+import Home from "./../../pages/Home/index";
 
-const App = () => {
+const Router = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Home />} />
       </Routes>
-    </Router>
+
+      {/* As Main App */}
+      <Routes>
+        <Route path="/" element={<RootLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/create-blog" element={<CreateBlog />} />
+          <Route path="/detail-blog" element={<DetailBlog />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
-export default App;
+export default Router;
