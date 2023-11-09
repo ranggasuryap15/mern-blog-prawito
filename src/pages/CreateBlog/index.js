@@ -1,10 +1,13 @@
 import React from "react";
-import { Button, Gap, Input, TextArea, Upload } from "../../components";
+import { useNavigate } from "react-router-dom";
+import { Button, Gap, Input, Link, TextArea, Upload } from "../../components";
 import "./createBlog.scss";
 
 const CreateBlog = () => {
+  const navigate = useNavigate();
   return (
     <div className="blog-post">
+      <Link title="Kembali" onClick={() => navigate("/")} />
       <p className="title">Create New Blog Post</p>
       <Input label="Post Title" />
       <Upload />
