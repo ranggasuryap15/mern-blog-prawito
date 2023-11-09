@@ -1,9 +1,13 @@
 import React from "react";
 
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 import { RegisterBg } from "../../assets";
 import { Link } from "../../components";
 import Gap from "./../../components/atoms/Gap/index";
+=======
+import { RegisterBg } from "../../assets";
+>>>>>>> 26c539876946f3c1f45190729ec840314369a0b0
 import "./detailBlog.scss";
 
 const DetailBlog = () => {
