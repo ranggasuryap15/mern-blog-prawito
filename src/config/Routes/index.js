@@ -18,8 +18,8 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<RootLayout />}>
           <Route index element={<Home />} />
-          <Route path="/create-blog" element={<CreateBlog />} />
-          <Route path="/detail-blog" element={<DetailBlog />} />
+          <Route path="/create-blog/:id?" element={<CreateBlog />} />
+          <Route path="/detail-blog/:id" element={<DetailBlog />} />
         </Route>
       </Routes>
     </BrowserRouter>

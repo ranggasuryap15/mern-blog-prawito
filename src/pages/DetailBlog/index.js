@@ -1,53 +1,47 @@
-import React from "react";
-
-import { useNavigate } from "react-router-dom";
-import { RegisterBg } from "../../assets";
+import Axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "../../components";
 import Gap from "./../../components/atoms/Gap/index";
 import "./detailBlog.scss";
 
-const DetailBlog = () => {
+const DetailBlog = (props) => {
   const navigate = useNavigate();
-  return (
-    <div className="detail-blog-wrapper">
-      <img className="img-cover" src={RegisterBg} alt="thumb" />
-      <p className="blog-title">Title Blog</p>
-      <p className="blog-author">Author - Date Post</p>
-      <div className="blog-body">
-        <p className="blog-body">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis,
-          qui. Similique voluptate sed praesentium. Voluptatem molestiae
-          obcaecati ut reiciendis? Quam nesciunt ab a id labore quia fugiat
-          minus, fugit iure. Lorem ipsum, dolor sit amet consectetur adipisicing
-          elit. Praesentium, odit accusantium, eos reprehenderit sapiente maxime
-          dignissimos vero tempore libero explicabo consequatur aliquid,
-          possimus minus tenetur. Dicta reiciendis molestias officiis vel. Lorem
-          ipsum dolor sit, amet consectetur adipisicing elit. Sit libero nobis
-          eveniet eaque porro dolores vitae incidunt quos impedit aliquid, nemo
-          delectus voluptates? Nobis mollitia, ab fuga deserunt facilis
-          voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Doloribus deserunt veritatis esse, sit earum a pariatur eius ipsum
-          saepe! Sunt odit tempore asperiores eum error quisquam saepe fuga
-          veritatis officiis? Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. Laudantium nesciunt in natus. A quibusdam veniam
-          repellat totam quos, cumque debitis natus quisquam error voluptates.
-          Error perspiciatis repudiandae dicta beatae voluptates? Lorem ipsum
-          dolor sit amet, consectetur adipisicing elit. Necessitatibus quas
-          praesentium officiis, quaerat in voluptate ex exercitationem culpa
-          quidem quae dignissimos laboriosam, vero saepe! Voluptas odio
-          necessitatibus tempora recusandae laborum.
+  const params = useParams();
+  const id = params.id;
+
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    Axios.get(`http://localhost:4000/v1/blog/post/${id}`)
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, [props, id]);
+
+  if (data.author) {
+    return (
+      <div className="detail-blog-wrapper">
+        <img
+          className="img-cover"
+          src={`http://localhost:4000/${data.image}`}
+          alt="thumb"
+        />
+        <p className="blog-title">{data.title}</p>
+        <p className="blog-author">
+          {data.author.name} - {data.createdAt}
         </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-          delectus accusantium sequi asperiores, facilis eaque laborum facere
-          voluptatum officia dolore vitae repellendus est nihil dolorem amet id
-          doloremque maiores aut.
-        </p>
+        <div className="blog-body">
+          <p>{data.body}</p>
+        </div>
+        <Gap height={20} />
+        <Link title="kembali ke home" onClick={() => navigate("/")} />
       </div>
-      <Gap height={20} />
-      <Link title="kembali ke home" onClick={() => navigate("/")} />
-    </div>
-  );
+    );
+  }
+
+  return <p>Loading data...</p>;
 };
 
 export default DetailBlog;
