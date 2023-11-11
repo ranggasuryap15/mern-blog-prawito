@@ -1,10 +1,16 @@
 import { legacy_createStore as createStore } from "redux";
 
 const initialState = {
-  dataBlog: [],
+  dataBlogs: [],
 };
 
 const reducer = (state = initialState, action) => {
+  if (action.type === "UPDATE_DATA_BLOG") {
+    return {
+      ...state,
+      dataBlogs: action.payload,
+    };
+  }
   return state;
 };
 
