@@ -1,5 +1,6 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { BlogItem, Button, Gap } from "./../../components/";
 import "./home.scss";
@@ -7,6 +8,9 @@ import "./home.scss";
 const Home = () => {
   // [namaState, method untuk mengubah state]
   const [dataBlog, setDataBlog] = useState([]);
+
+  const stateGlobal = useSelector((state) => state);
+  console.log(stateGlobal);
 
   useEffect(() => {
     Axios.get("http://localhost:4000/v1/blog/posts")
