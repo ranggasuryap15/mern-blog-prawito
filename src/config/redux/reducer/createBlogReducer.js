@@ -18,7 +18,7 @@ const createBlogReducer = (state = initialState, action) => {
     };
   }
 
-  if ((action.type = "SET_IMAGE_PREVIEW")) {
+  if (action.type === "SET_IMAGE_PREVIEW") {
     return {
       ...state,
       imgPreview: action.payload,

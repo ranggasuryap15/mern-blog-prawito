@@ -5,6 +5,10 @@ import { setDataBlog } from "../../config/redux/action";
 import { BlogItem, Button, Gap } from "./../../components/";
 import "./home.scss";
 
+import Axios from "axios";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+
 const Home = () => {
   const [counter, setCounter] = useState(1);
   const dispatch = useDispatch();
@@ -21,6 +25,31 @@ const Home = () => {
   };
   const next = () => {
     setCounter(counter === page.totalPage ? page.totalPage : counter + 1);
+  };
+
+  const confirmDelete = (id) => {
+    confirmAlert({
+      title: "Confirm to delete",
+      message: "Are you sure you want to delete",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            Axios.delete(`http://localhost:4000/v1/blog/post/${id}`)
+              .then((res) => {
+                console.log(res);
+                // update page when delete
+                dispatch(setDataBlog(counter));
+              })
+              .catch((err) => console.log(err));
+          },
+        },
+        {
+          label: "No",
+          onClick: () => console.log("no"),
+        },
+      ],
+    });
   };
 
   return (
@@ -40,6 +69,7 @@ const Home = () => {
               name={blog.author.name}
               date={blog.createdAt}
               _id={blog._id}
+              onDelete={confirmDelete}
             />
           );
         })}

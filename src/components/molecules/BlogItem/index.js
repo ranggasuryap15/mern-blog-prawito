@@ -5,7 +5,7 @@ import "./blogItem.scss";
 
 const BlogItem = (props) => {
   const navigate = useNavigate();
-  const { image, title, name, date, body, _id } = props;
+  const { image, title, name, date, body, _id, onDelete } = props;
   return (
     <div className="blog-item">
       <img className="image-thumb" src={image} alt="post" />
@@ -16,7 +16,9 @@ const BlogItem = (props) => {
             <p className="edit" onClick={() => navigate(`/create-blog/${_id}`)}>
               Edit
             </p>
-            <p className="delete">Delete</p>
+            <p className="delete" onClick={() => onDelete(_id)}>
+              Delete
+            </p>
           </div>
         </div>
         <p className="author">
