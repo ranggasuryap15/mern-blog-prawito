@@ -1,4 +1,4 @@
-const initialStateHome = {
+const initialState = {
   dataBlog: [],
   page: {
     currentPage: 1,
@@ -6,7 +6,7 @@ const initialStateHome = {
   },
 };
 
-const homeReducer = (state = initialStateHome, action) => {
+const homeReducer = (state = initialState, action) => {
   if (action.type === "UPDATE_DATA_BLOG") {
     return {
       ...state,
