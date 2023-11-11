@@ -1,7 +1,7 @@
-import Axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setDataBlog } from "../../config/redux/action";
 import { BlogItem, Button, Gap } from "./../../components/";
 import "./home.scss";
 
@@ -11,14 +11,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    Axios.get("http://localhost:4000/v1/blog/posts")
-      .then((result) => {
-        const responseAPI = result.data;
-        console.log(responseAPI);
-
-        dispatch({ type: "UPDATE_DATA_BLOG", payload: responseAPI.data });
-      })
-      .catch((err) => console.log("Error:", err));
+    dispatch(setDataBlog());
   }, [dispatch]);
 
   const navigate = useNavigate();
