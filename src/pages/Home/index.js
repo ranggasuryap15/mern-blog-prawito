@@ -7,17 +7,15 @@ import "./home.scss";
 
 const Home = () => {
   // [namaState, method untuk mengubah state]
-  // const [dataBlog, setDataBlog] = useState([]); // state local
-  const { dataBlogs } = useSelector((state) => state);
+  const { dataBlog } = useSelector((state) => state.HomeReducer); // home reducer
   const dispatch = useDispatch();
 
   useEffect(() => {
     Axios.get("http://localhost:4000/v1/blog/posts")
       .then((result) => {
-        console.log("Data API:", result.data);
         const responseAPI = result.data;
+        console.log(responseAPI);
 
-        // setDataBlog(responseAPI.data); // state local
         dispatch({ type: "UPDATE_DATA_BLOG", payload: responseAPI.data });
       })
       .catch((err) => console.log("Error:", err));
@@ -31,7 +29,7 @@ const Home = () => {
       </div>
       <Gap height={20} />
       <div className="content-wrapper">
-        {dataBlogs.map((blog) => {
+        {dataBlog.map((blog) => {
           return (
             <BlogItem
               key={blog._id}
